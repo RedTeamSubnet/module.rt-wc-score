@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=70.3.0,<80.0.0", "setuptools-scm>=8.0.4,<9.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simple_model"
+authors = [{ name = "Batkhuu Byambajav", email = "batkhuu10@gmail.com" }]
+description = "'simple_model' is a template module for python AI/ML model."
+readme = "README.md"
+requires-python = ">=3.9,<4.0"
+keywords = [
+	"simple_model",
+	"model",
+	"module",
+	"ai/ml/dl",
+	"artificial-intelligence",
+	"machine-learning",
+	"deep-learning",
+]
+license = { file = "LICENSE.txt" }
+classifiers = [
+	"Development Status :: 4 - Beta",
+	"Intended Audience :: Developers",
+	"Topic :: Software Development :: Libraries",
+	"License :: OSI Approved :: MIT License",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3.9",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+	"Programming Language :: Python :: 3.13",
+]
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+# [tool.setuptools.packages.find]
+# where = ["src"]
+# include = ["simple_model*"]
+# namespaces = false
+
+[tool.setuptools.dynamic]
+version = { attr = "simple_model.__version__.__version__" }
+dependencies = { file = "./requirements.txt" }
+# optional-dependencies.gpu = { file = ["./requirements/requirements.gpu.txt"] }
+
+[project.urls]
+Homepage = "https://github.com/bybatkhuu/model.python-template"
+Documentation = "https://bybatkhuu.github.io/model.python-template"
+Repository = "https://github.com/bybatkhuu/model.python-template.git"
+Issues = "https://github.com/bybatkhuu/model.python-template/issues"
+Changelog = "https://github.com/bybatkhuu/model.python-template/CHANGELOG.md"
