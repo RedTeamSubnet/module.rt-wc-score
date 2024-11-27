@@ -27,7 +27,7 @@ project/
 ├── requirements/           # Python dependency requirements for different environments
 ├── results/                # Results of this model (SHOULD NOT BE INCLUDED IN THE REPOSITORY)
 ├── scripts/                # Helpful scripts to automate tasks or assist in the development process
-├── simple_model/           # Main CODEBASE of this project as a python module
+├── metrics_processor/           # Main CODEBASE of this project as a python module
 |   ├── modules/                # External modules for this project
 |   |   ├── module_1/
 |   |   ├── module_2/

@@ -1,3 +1,3 @@
 # ModelConfigPM
 
-::: src.simple_model.ModelConfigPM
+::: src.metrics_processor.ModelConfigPM

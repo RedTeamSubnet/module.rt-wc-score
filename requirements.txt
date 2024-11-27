@@ -9,8 +9,6 @@ pytz==2024.2
 scikit-learn==1.5.2
 scipy==1.14.1
 six==1.16.0
-# TODO: CHANGE SS-PARSER REQUIREMENT
--e git+ssh://git@github.com/humblebeeintel/module.ss-parser.git@dd2488e517348d1d9afe2a597db3fab862db823b#egg=ss_parser
 threadpoolctl==3.5.0
 typing_extensions==4.12.2
 tzdata==2024.2

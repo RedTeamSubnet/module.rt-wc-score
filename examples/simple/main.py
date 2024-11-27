@@ -1,58 +1,57 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-## Standard libraries
 import sys
+import json
 import logging
-from typing import Any
+from pathlib import Path
 
-## Third-party libraries
-import numpy as np
-from numpy.typing import NDArray
-
-## Internal modules
-from simple_model import SimpleModel
-
+from metrics_processor.modules.preprocessing import Preprocessor
 
 logger = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
 
-    # Pre-defined variables (for customizing and testing)
-    _model_dir = "./models"
-    _model_name = "linear_regression.v0.0.1-24"
+    _data_dir_path = Path(__file__).parent.parent.parent / "data"
+    _raw_json_data_path = _data_dir_path / "raw" / "raw.json"
+    _processed_json_data_path = _data_dir_path / "processed" / "processed.json"
 
-    _X_train = np.array([[1], [2], [3], [4], [5]])
-    _y_train = np.array([2, 4, 6, 8, 10])
+    _raw_json_data_path.parent.mkdir(parents=True, exist_ok=True)
+    _processed_json_data_path.parent.mkdir(parents=True, exist_ok=True)
 
-    _X_test = np.array([[6], [7], [8]])
-    _y_test = np.array([10, 14, 16])
+    logger.info(f"Reading data from: {_raw_json_data_path}")
+    try:
+        with open(_raw_json_data_path, "r") as f:
+            raw_data = f.read()
+            json_data = json.loads(raw_data)
+            logger.debug(
+                f"Raw data structure: {json.dumps(json_data, indent=2)[:500]}..."
+            )
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON in input file: {e}")
+        sys.exit(1)
+    except FileNotFoundError:
+        logger.error(f"Input file not found: {_raw_json_data_path}")
+        sys.exit(1)
 
-    # Create the model instance
-    _config = {"models_dir": _model_dir, "model_name": _model_name}
-    _model = SimpleModel(config=_config)
+    logger.info("Initializing preprocessor...")
+    preprocessor = Preprocessor()
 
-    # Train or load the model
-    if not SimpleModel.is_model_files_exist(**_config):
-        _model.train(X=_X_train, y=_y_train)
-    else:
-        _model.load()
+    logger.info("Processing data...")
+    processed_data = preprocessor(raw_data)
 
-    # Predict the target values
-    _y_pred: NDArray[Any] = _model.predict(X=_X_test)
-    logger.info(f"Predicted values for {_X_test.flatten()}: {_y_pred.flatten()}")
+    if processed_data is None:
+        logger.error("Failed to process data")
+        sys.exit(1)
 
-    # Evaluate the model
-    _r2_score: float = _model.score(y_true=_y_test, y_pred=_y_pred)
-    logger.info(f"R^2 score: {_r2_score}")
-
-    _is_similar: bool = _model.is_similar(X=_X_test, y=_y_test)
-    logger.info(f"Is similar: {_is_similar}")
-
-    # Save the model
-    if _model.is_trained() and (not SimpleModel.is_model_files_exist(**_config)):
-        _model.save()
+    logger.info(f"Writing processed data to: {_processed_json_data_path}")
+    with open(_processed_json_data_path, "w") as f:
+        json.dump(processed_data, f, indent=2)
 
     logger.info("Done!")

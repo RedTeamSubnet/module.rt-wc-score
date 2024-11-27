@@ -15,7 +15,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 ## Internal modules
-from simple_model import SimpleModel
+from metrics_processor import SimpleModel
 
 
 logger = logging.getLogger(__name__)

@@ -3,13 +3,13 @@ requires = ["setuptools>=70.3.0,<80.0.0", "setuptools-scm>=8.0.4,<9.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "simple_model"
+name = "metrics_processor"
 authors = [{ name = "Batkhuu Byambajav", email = "batkhuu10@gmail.com" }]
-description = "'simple_model' is a template module for python AI/ML model."
+description = "'metrics_processor' is a template module for python AI/ML model."
 readme = "README.md"
 requires-python = ">=3.9,<4.0"
 keywords = [
-	"simple_model",
+	"metrics_processor",
 	"model",
 	"module",
 	"ai/ml/dl",
@@ -33,13 +33,13 @@ classifiers = [
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
-# [tool.setuptools.packages.find]
-# where = ["src"]
-# include = ["simple_model*"]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["metrics_processor*"]
 # namespaces = false
 
 [tool.setuptools.dynamic]
-version = { attr = "simple_model.__version__.__version__" }
+version = { attr = "metrics_processor.__version__.__version__" }
 dependencies = { file = "./requirements.txt" }
 # optional-dependencies.gpu = { file = ["./requirements/requirements.gpu.txt"] }
 

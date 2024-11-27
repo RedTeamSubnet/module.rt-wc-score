@@ -135,14 +135,14 @@ class SSHeuristicsManager:
         mouse_movements_df = MouseMovementsHeursiticsCheck().check(
             self._input_df[
                 [
-                    "UM_ui_mouseMovements_count",
-                    "UM_ui_mouseMovements_vel_x_std",
-                    "UM_ui_mouseMovements_vel_y_std",
-                    "UM_ui_mouseMovements_self_intersections",
-                    "UM_ui_mouseMovements_angles_std",
-                    "UM_ui_mouseMovements_elapsed_time",
-                    "UM_ui_mouseMovements_length_ratio",
-                    "UM_ui_mouseMovements_max_velocity",
+                    "UM_mouse_movement_count",
+                    "UM_mouse_movement_vel_x_std",
+                    "UM_mouse_movement_vel_y_std",
+                    "UM_mouse_movement_self_intersections",
+                    "UM_mouse_movement_angles_std",
+                    "UM_mouse_movement_elapsed_time",
+                    "UM_mouse_movement_length_ratio",
+                    "UM_mouse_movement_max_velocity",
                 ]
             ],
             mask=mask,

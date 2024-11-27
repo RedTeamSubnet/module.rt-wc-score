@@ -17,15 +17,15 @@ cd ~/workspaces/projects
 **OPTION A.** Clone the repository:
 
 ```sh
-git clone git@github.com:bybatkhuu/model.python-template.git simple_model && \
-    cd simple_model
+git clone git@github.com:bybatkhuu/model.python-template.git metrics_processor && \
+    cd metrics_processor
 ```
 
 **OPTION B.** Download source code:
 
 1. Download archived **zip** file from [**releases**](https://github.com/bybatkhuu/model.python-template/releases).
 2. Extract it into the project directory.
-3. Rename the extracted directory from **`model.python-template`** to **`simple_model`**.
+3. Rename the extracted directory from **`model.python-template`** to **`metrics_processor`**.
 
 ## 2. 📦 Install the module
 
@@ -60,9 +60,9 @@ pip install -r ./requirements/requirements.dev.txt
 
 ```sh
 # Install from .whl file:
-pip install ./simple_model-[VERSION]-py3-none-any.whl
+pip install ./metrics_processor-[VERSION]-py3-none-any.whl
 # Or install from .tar.gz file:
-pip install ./simple_model-[VERSION].tar.gz
+pip install ./metrics_processor-[VERSION].tar.gz
 ```
 
 **OPTION E.** Copy the **module** into the project directory (for **testing**):
@@ -72,7 +72,7 @@ pip install ./simple_model-[VERSION].tar.gz
 pip install -r ./requirements.txt
 
 # Copy the module source code into the project:
-cp -r ./src/simple_model [PROJECT_DIR]
+cp -r ./src/metrics_processor [PROJECT_DIR]
 # For example:
-cp -r ./src/simple_model /some/path/project/
+cp -r ./src/metrics_processor /some/path/project/
 ```

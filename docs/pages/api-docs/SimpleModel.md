@@ -1,3 +1,3 @@
 # SimpleModel
 
-::: src.simple_model.SimpleModel
+::: src.metrics_processor.SimpleModel
