@@ -45,7 +45,6 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
             Dictionary containing computed count features
         """
         try:
-            print(events)
             return {
                 self.config.processing.feature_names[
                     "keypresses"
