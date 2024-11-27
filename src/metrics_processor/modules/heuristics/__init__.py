@@ -1,5 +1,2 @@
-from ._base import SSHeuristicsManager
-
-all = [
-    "SSHeuristicsManager",
-]
+from ._main import HeuristicAnalyzer
+from .config import HeuristicConfig
