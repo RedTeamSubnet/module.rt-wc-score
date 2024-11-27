@@ -59,7 +59,7 @@ class JsonDataFlattener(BasePreprocessor):
                 data = json.loads(data)
                 logger.debug("Successfully parsed JSON string")
 
-            if self.config.validate:
+            if self.config.is_validate:
                 parsed_data = self.config.input_data.model_validate(data).model_dump()
                 logger.debug("Successfully validated input data")
             else:

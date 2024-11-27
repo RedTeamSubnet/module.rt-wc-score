@@ -70,4 +70,4 @@ _FIELD_MAPPING = {
 class JsonDataFlattenerConfigPM(ExtraBaseModel):
     field_mapping: Dict[str, List[str]] = Field(default_factory=lambda: _FIELD_MAPPING)
     input_data: InputData = Field(default_factory=InputData)
-    validate: bool = Field(default=True)
+    is_validate: bool = Field(default=True)
