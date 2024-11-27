@@ -5,7 +5,7 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from ._base import BaseFeatureEngineer
+from .._base import BaseFeatureEngineer
 from .config import KeyboardConfig
 
 logger = logging.getLogger(__name__)
@@ -48,9 +48,7 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
             return {
                 self.config.processing.feature_names[
                     "keypresses"
-                ]: self._get_event_count(
-                    events.get("keypresses")
-                ),
+                ]: self._get_event_count(events.get("keypresses")),
                 self.config.processing.feature_names["keydowns"]: self._get_event_count(
                     events.get("keydowns")
                 ),

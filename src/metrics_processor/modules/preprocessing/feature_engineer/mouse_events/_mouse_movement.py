@@ -2,12 +2,11 @@
 
 import logging
 from typing import Dict, List, Optional
-from datetime import datetime
 
 import numpy as np
 from dateutil.parser import parse
 
-from ._base import BaseFeatureEngineer
+from .._base import BaseFeatureEngineer
 from .config import MouseMovementConfig
 
 logger = logging.getLogger(__name__)

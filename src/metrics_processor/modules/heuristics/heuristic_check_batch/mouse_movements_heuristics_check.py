@@ -13,7 +13,6 @@ class MouseMovementsHeursiticsCheck(HeuristicsCheck):
 
     # Define thresholds in constructor
     def __init__(self, max_human_velocity=18000) -> None:
-        super().__init__()
         self._max_human_velocity = max_human_velocity
 
         self._all_heuristic_columns = [

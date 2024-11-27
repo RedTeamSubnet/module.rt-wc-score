@@ -3,9 +3,9 @@
 import logging
 from typing import Dict, List, Any, Optional
 
-from ._mouse_movement import MouseMovementProcessor
-from ._mouse_down_up import MouseDownUpProcessor
-from ._keyboard_events import KeyboardEventsProcessor
+from .mouse_events import MouseMovementProcessor
+from .mouse_events import MouseDownUpProcessor
+from .keyboard_events import KeyboardEventsProcessor
 from .config import FeatureEngineerConfig
 
 logger = logging.getLogger(__name__)
