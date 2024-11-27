@@ -14,7 +14,7 @@ class KeyboardProcessingConfig(BaseModel):
         description="Names of the output count features",
     )
     default_value: float = Field(
-        default=float("nan"), description="Default value for invalid/missing data"
+        default=None, description="Default value for invalid/missing data"
     )
 
     class Config:
@@ -26,9 +26,9 @@ class KeyboardConfig(BaseModel):
 
     input_fields: Dict[str, str] = Field(
         default={
-            "keypresses": "keyboard_keypresses",
-            "keydowns": "keyboard_keydowns",
-            "keyups": "keyboard_keyups",
+            "keypresses": "keypresses",
+            "keydowns": "keydowns",
+            "keyups": "keyups",
         },
         description="Field names for keyboard event data",
     )

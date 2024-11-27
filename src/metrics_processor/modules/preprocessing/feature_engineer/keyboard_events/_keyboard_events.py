@@ -45,15 +45,18 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
             Dictionary containing computed count features
         """
         try:
+            print(events)
             return {
                 self.config.processing.feature_names[
                     "keypresses"
-                ]: self._get_event_count(events.get("keypresses")),
+                ]: self._get_event_count(
+                    events.get(self.config.input_fields["keypresses"])
+                ),
                 self.config.processing.feature_names["keydowns"]: self._get_event_count(
-                    events.get("keydowns")
+                    events.get(self.config.input_fields["keydowns"])
                 ),
                 self.config.processing.feature_names["keyups"]: self._get_event_count(
-                    events.get("keyups")
+                    events.get(self.config.input_fields["keyups"])
                 ),
             }
         except Exception as e:

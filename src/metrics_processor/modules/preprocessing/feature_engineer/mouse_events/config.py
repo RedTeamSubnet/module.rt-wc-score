@@ -52,7 +52,7 @@ class MouseDownUpProcessingConfig(BaseModel):
         description="Names of the output features",
     )
     default_value: float = Field(
-        default=float("nan"), description="Default value for invalid/missing data"
+        default=None, description="Default value for invalid/missing data"
     )
 
     class Config:
