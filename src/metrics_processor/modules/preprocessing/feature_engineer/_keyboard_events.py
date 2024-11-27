@@ -49,13 +49,13 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
                 self.config.processing.feature_names[
                     "keypresses"
                 ]: self._get_event_count(
-                    events.get(self.config.input_fields["keypresses"])
+                    events.get("keypresses")
                 ),
                 self.config.processing.feature_names["keydowns"]: self._get_event_count(
-                    events.get(self.config.input_fields["keydowns"])
+                    events.get("keydowns")
                 ),
                 self.config.processing.feature_names["keyups"]: self._get_event_count(
-                    events.get(self.config.input_fields["keyups"])
+                    events.get("keyups")
                 ),
             }
         except Exception as e:

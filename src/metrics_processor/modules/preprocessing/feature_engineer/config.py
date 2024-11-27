@@ -44,13 +44,8 @@ class MouseDownUpProcessingConfig(BaseModel):
 
     feature_names: Dict[str, str] = Field(
         default={
-            "mean_dwell_time": "mouse_mean_dwell_time",
-            "std_dwell_time": "mouse_std_dwell_time",
-            "mean_inter_click": "mouse_mean_inter_click_interval",
-            "std_inter_click": "mouse_std_inter_click_interval",
             "downs_total": "mouse_mouseDowns_total",
             "ups_total": "mouse_mouseUps_total",
-            "event_density": "mouse_event_density",
         },
         description="Names of the output features",
     )

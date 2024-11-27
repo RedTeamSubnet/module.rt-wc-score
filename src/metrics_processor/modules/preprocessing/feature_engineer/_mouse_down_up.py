@@ -42,7 +42,6 @@ class MouseDownUpProcessor(BaseFeatureEngineer):
         """
         try:
             results = self._get_default_results()
-
             results[self.config.processing.feature_names["downs_total"]] = len(
                 mouse_data.get(self.config.down_field, [])
             )
