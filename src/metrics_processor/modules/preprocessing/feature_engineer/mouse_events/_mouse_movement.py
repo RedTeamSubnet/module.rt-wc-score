@@ -33,10 +33,12 @@ class MouseMovementProcessor(BaseFeatureEngineer):
         """Process mouse movement data and compute velocity features."""
         try:
             velocities = self._compute_velocity(mouse_movement_data)
+            count = self._compute_count(mouse_movement_data)
             return {
                 self.config.processing.velocity_feature_name: (
                     np.std(velocities) if velocities else np.nan
-                )
+                ),
+                self.config.processing.movements_count_feature_name: count
             }
         except Exception as e:
             logger.error(f"Error computing mouse movement features: {str(e)}")
@@ -90,3 +92,10 @@ class MouseMovementProcessor(BaseFeatureEngineer):
         except Exception as e:
             logger.error(f"Error in velocity computation: {str(e)}")
             return []
+
+    def _compute_count(self, mouse_movements: List[Dict]) -> List[float]:
+        """Compute velocities from mouse movement data."""
+        if not mouse_movements:
+            return []
+        else:
+            return len(mouse_movements)

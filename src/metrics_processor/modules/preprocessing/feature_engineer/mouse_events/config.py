@@ -17,6 +17,10 @@ class MouseMovementProcessingConfig(BaseModel):
         default="mouse_movement_stddev_velocity",
         description="Name of the output velocity feature",
     )
+    movements_count_feature_name: str = Field(
+        default="mouse_movement_count",
+        description="Name of the output mouse movement count feature",
+    )
 
     class Config:
         frozen = True
@@ -42,8 +46,8 @@ class MouseDownUpProcessingConfig(BaseModel):
 
     feature_names: Dict[str, str] = Field(
         default={
-            "downs_total": "mouse_mouseDowns_total",
-            "ups_total": "mouse_mouseUps_total",
+            "mouse_downs_total": "mouse_down_total",
+            "mouse_ups_total": "mouse_ups_total",
         },
         description="Names of the output features",
     )
