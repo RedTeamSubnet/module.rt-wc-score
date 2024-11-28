@@ -54,6 +54,8 @@ class MetricsProcessor:
             logger.info("Preprocessing raw data...")
             processed_features = self.preprocessor(raw_data)
 
+            logger.info("Preprocessing raw data...")
+            logger.info(f"Processed features: {processed_features}")
             if processed_features is None:
                 logger.error("Preprocessing failed")
                 return {

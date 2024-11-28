@@ -12,7 +12,7 @@ class HeuristicConfig(BaseModel):
         description="Configuration for mouse event analysis",
     )
     score_threshold: float = Field(
-        default=0.5, description="Threshold for bot classification (>threshold = bot)"
+        default=0.65, description="Threshold for bot classification (>threshold = bot)"
     )
 
     class Config:

@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 
 from .keyboard_events import KeyboardConfig
 from .mouse_events import MouseDownUpConfig, MouseMovementConfig
+from .checkboxes import CheckboxFeatureConfig
 
 
 class FeatureEngineerConfig(BaseModel):
@@ -20,6 +21,10 @@ class FeatureEngineerConfig(BaseModel):
     keyboard: KeyboardConfig = Field(
         default_factory=KeyboardConfig,
         description="Keyboard events processing configuration",
+    )
+    checkbox: CheckboxFeatureConfig = Field(
+        default_factory=CheckboxFeatureConfig,
+        description="Checkbox events processing configuration",
     )
 
     class Config:

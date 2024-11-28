@@ -38,7 +38,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
                 self.config.processing.velocity_feature_name: (
                     np.std(velocities) if velocities else np.nan
                 ),
-                self.config.processing.movements_count_feature_name: count
+                self.config.processing.movements_count_feature_name: count,
             }
         except Exception as e:
             logger.error(f"Error computing mouse movement features: {str(e)}")

@@ -6,6 +6,7 @@ from typing import Dict, List, Any, Optional
 from .mouse_events import MouseMovementProcessor
 from .mouse_events import MouseDownUpProcessor
 from .keyboard_events import KeyboardEventsProcessor
+from .checkboxes import CheckboxEventProcessor
 from .config import FeatureEngineerConfig
 
 logger = logging.getLogger(__name__)
@@ -29,6 +30,7 @@ class FeatureEngineer:
             config=self.config.mouse_down_up
         )
         self.keyboard_processor = KeyboardEventsProcessor(config=self.config.keyboard)
+        self.checkbox_processor = CheckboxEventProcessor(config=self.config.checkbox)
 
     def __call__(self, data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         """Process input data and engineer features.
@@ -60,10 +62,13 @@ class FeatureEngineer:
             }
             keyboard_results = self.keyboard_processor(keyboard_data)
 
+            checkbox_results = self.checkbox_processor(data)
+
             return {
                 **mouse_movement_results,
                 **mouse_down_up_results,
                 **keyboard_results,
+                **checkbox_results,
             }
 
         except Exception as e:

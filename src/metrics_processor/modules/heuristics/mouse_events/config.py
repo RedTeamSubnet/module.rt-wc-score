@@ -1,8 +1,9 @@
 """Configuration for mouse events analysis."""
 
 from pydantic import BaseModel, Field
-from .velocity.config import VelocityConfig
-from .movement_count.config import MovementCountConfig
+from .velocity import VelocityConfig
+from .movement_count import MovementCountConfig
+from .checkbox_path import CheckboxPathConfig
 
 
 class MouseEventConfig(BaseModel):
@@ -14,6 +15,10 @@ class MouseEventConfig(BaseModel):
     movement_count: MovementCountConfig = Field(
         default_factory=MovementCountConfig,
         description="Movement count analysis configuration",
+    )
+    checkbox_path: CheckboxPathConfig = Field(
+        default_factory=CheckboxPathConfig,
+        description="Checkbox path analysis configuration",
     )
 
     class Config:

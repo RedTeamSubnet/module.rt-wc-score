@@ -46,6 +46,7 @@ class InputData(BaseModel):
     project_id: Optional[str] = None
     user_id: Optional[str] = None
     metrics: Metrics = Field(default_factory=Metrics)
+    additional: Optional[any] = None
 
     class Config:
         extra = "allow"
@@ -64,10 +65,11 @@ _FIELD_MAPPING = {
     "keyboard_specificKeyEvents": ["metrics", "keyboard", "specificKeyEvents"],
     "signInButton_hoverToClickTime": ["metrics", "signInButton", "hoverToClickTime"],
     "signInButton_mouseLeaveCount": ["metrics", "signInButton", "mouseLeaveCount"],
+    "checkboxes": ["additional", "checkbox_interactions"],
 }
 
 
 class JsonDataFlattenerConfigPM(ExtraBaseModel):
     field_mapping: Dict[str, List[str]] = Field(default_factory=lambda: _FIELD_MAPPING)
     input_data: InputData = Field(default_factory=InputData)
-    is_validate: bool = Field(default=True)
+    is_validate: bool = Field(default=False)
