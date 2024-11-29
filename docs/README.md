@@ -1,19 +1,33 @@
----
-hide:
-  - navigation
-#   - toc
----
+# Metrics Processor Documentation
 
-# Introduction
+## Documentation Structure
 
-This is a template repo for AI/ML model module.
+### Core Modules
 
-## ✨ Features
+1. **Preprocessing**
+   - JSON flattening
+   - Feature engineering
+   - Data transformation
 
-- AI/ML model
-- Python module/package
-- Jupyter notebook
-- Research
-- Project Structure
-- Template
-- CI/CD
+2. **Heuristics**
+   - Mouse event analysis
+   - Behavior pattern detection
+   - Scoring system
+
+### Quick Links
+
+- [Project Structure](structure.md)
+- [Configuration Guide](modules/configuration.md)
+- [Examples](examples/basic_usage.md)
+
+## Module Documentation
+
+- [Preprocessing](modules/preprocessing/README.md)
+    - Data flattening
+    - Feature extraction
+    - Event processing
+
+- [Heuristics](modules/heuristics/README.md)
+    - Bot detection algorithms
+    - Scoring methodology
+    - Configuration options
