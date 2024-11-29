@@ -1,6 +1,6 @@
 """Configuration for JSON data flattening."""
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
 
 
@@ -46,7 +46,7 @@ class InputData(BaseModel):
     project_id: Optional[str] = None
     user_id: Optional[str] = None
     metrics: Metrics = Field(default_factory=Metrics)
-    additional: Optional[any] = None
+    additional: Optional[Any] = None
 
     class Config:
         extra = "allow"
