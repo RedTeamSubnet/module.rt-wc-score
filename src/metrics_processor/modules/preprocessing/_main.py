@@ -50,7 +50,8 @@ class Preprocessor:
             if not features:
                 logger.error("Failed to engineer features")
                 return None
-
+            features["user_id"] = flattened_data["user_id"]
+            features["project_id"] = flattened_data["project_id"]
             return features
 
         except Exception as e:

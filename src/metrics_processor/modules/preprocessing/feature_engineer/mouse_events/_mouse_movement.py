@@ -47,6 +47,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
     def _compute_velocity(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
         if not mouse_movements:
+            logger.warning("Empty mouse movement data to compute velocity")
             return []
 
         try:
@@ -96,6 +97,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
     def _compute_count(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
         if not mouse_movements:
+            logger.warning("Empty mouse movement data to compute count")
             return []
         else:
             return len(mouse_movements)

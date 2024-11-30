@@ -32,6 +32,7 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
             mouse_movements = data.get("mouse_movements", [])
 
             if not checkboxes:
+                logger.warning("No checkbox events found")
                 return {}
 
             return self._process_checkbox_sequence(checkboxes, mouse_movements)

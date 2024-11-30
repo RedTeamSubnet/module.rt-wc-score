@@ -62,5 +62,6 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
             Count of events or default value if invalid
         """
         if not isinstance(events, list):
+            logger.warning("Invalid keyboard events data type to process count")
             return self.config.processing.default_value
         return len(events)
