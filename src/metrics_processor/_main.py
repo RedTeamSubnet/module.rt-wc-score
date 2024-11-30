@@ -55,7 +55,7 @@ class MetricsProcessor:
             processed_features = self.preprocessor(raw_data)
 
             logger.info("Preprocessing raw data...")
-            logger.info(f"Processed features: {processed_features}")
+            logger.info(f"Processing Done")
             if processed_features is None:
                 logger.error("Preprocessing failed")
                 return {
@@ -70,7 +70,6 @@ class MetricsProcessor:
 
             return {
                 "success": True,
-                "features": processed_features,
                 "analysis": analysis_results,
             }
 
