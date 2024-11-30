@@ -175,6 +175,9 @@ processor = MetricsProcessor(config=config)
 }
 ```
 
+>[!Note]
+> Output will be saved into [data](./data/processed/) folder after process is completed.
+
 ## ⚠️ Error Handling
 
 ```python
