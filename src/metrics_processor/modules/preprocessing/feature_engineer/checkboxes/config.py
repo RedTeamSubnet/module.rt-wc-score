@@ -11,4 +11,5 @@ class CheckboxFeatureConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True

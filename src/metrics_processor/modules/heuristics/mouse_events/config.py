@@ -8,6 +8,9 @@ from .checkbox_path import CheckboxPathConfig
 
 class MouseEventConfig(BaseModel):
     """Configuration for mouse event analysis."""
+    class Config:
+        """ Pydantic configuration."""
+        frozen = True
 
     velocity: VelocityConfig = Field(
         default_factory=VelocityConfig, description="Velocity analysis configuration"
@@ -21,5 +24,3 @@ class MouseEventConfig(BaseModel):
         description="Checkbox path analysis configuration",
     )
 
-    class Config:
-        frozen = True

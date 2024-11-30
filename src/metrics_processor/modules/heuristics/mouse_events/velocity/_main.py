@@ -11,10 +11,6 @@ logger = logging.getLogger(__name__)
 class VelocityAnalyzer:
     """Analyzes mouse velocity patterns for bot detection."""
 
-    def __init__(self, config: Optional[VelocityConfig] = None):
-        """Initialize velocity analyzer."""
-        self.config = config or VelocityConfig()
-
     def __call__(self, features: Dict[str, Any]) -> float:
         """Analyze velocity features for bot detection."""
         try:
@@ -33,3 +29,7 @@ class VelocityAnalyzer:
         except Exception as e:
             logger.error(f"Error in velocity analysis: {str(e)}")
             return 0.0
+
+    def __init__(self, config: Optional[VelocityConfig] = None):
+        """Initialize velocity analyzer."""
+        self.config = config or VelocityConfig()

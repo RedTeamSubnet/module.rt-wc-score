@@ -4,6 +4,9 @@ from pydantic import BaseModel, Field
 
 
 class VelocityConfig(BaseModel):
+    class Config:
+        """ Pydantic configuration. """
+        frozen = True
     min_velocity_variation: float = Field(
         default=200.0,
         description="Minimum expected velocity standard deviation",
@@ -14,5 +17,3 @@ class VelocityConfig(BaseModel):
     )
     weight: float = Field(default=1.0, description="Weight for velocity analysis")
 
-    class Config:
-        frozen = True

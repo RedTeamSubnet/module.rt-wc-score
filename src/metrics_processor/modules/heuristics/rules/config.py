@@ -5,6 +5,9 @@ from pydantic import BaseModel, Field
 
 class RuleConfig(BaseModel):
     """Configuration for rule combination."""
+    class Config:
+        """ Pydantic configuration."""
+        frozen = True
 
     combination_method: str = Field(
         default="weighted_average", description="Method to combine individual scores"
@@ -16,5 +19,3 @@ class RuleConfig(BaseModel):
         default=0.7, description="Minimum confidence needed for classification"
     )
 
-    class Config:
-        frozen = True

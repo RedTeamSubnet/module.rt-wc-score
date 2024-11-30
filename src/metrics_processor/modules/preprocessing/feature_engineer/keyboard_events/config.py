@@ -38,4 +38,5 @@ class KeyboardConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True

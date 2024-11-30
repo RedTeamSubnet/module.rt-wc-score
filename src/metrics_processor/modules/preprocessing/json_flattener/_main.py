@@ -21,6 +21,27 @@ class JsonDataFlattener(BasePreprocessor):
         self._flattened_data: Optional[Dict[str, Any]] = None
         self.config = config or JsonDataFlattenerConfigPM()
 
+    def __call__(self, data: Union[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """Process input data and return flattened structure."""
+        try:
+            if isinstance(data, str):
+                data = json.loads(data)
+                logger.debug("Successfully parsed JSON string")
+
+            if self.config.is_validate:
+                parsed_data = self.config.input_data.model_validate(data).model_dump()
+                logger.debug("Successfully validated input data")
+            else:
+                parsed_data = data
+
+            logger.debug("Starting metrics extraction")
+            self._flattened_data = self._extract_metrics(parsed_data)
+            return self._flattened_data
+
+        except Exception as e:
+            logger.error(f"Error during flattening: {str(e)}")
+            return None
+
     def _get_nested_value(
         self, data: Dict[str, Any], path: List[str], field_name: str
     ) -> Any:
@@ -51,24 +72,3 @@ class JsonDataFlattener(BasePreprocessor):
         except Exception as e:
             logger.error(f"Error in _extract_metrics: {str(e)}")
             raise
-
-    def __call__(self, data: Union[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-        """Process input data and return flattened structure."""
-        try:
-            if isinstance(data, str):
-                data = json.loads(data)
-                logger.debug("Successfully parsed JSON string")
-
-            if self.config.is_validate:
-                parsed_data = self.config.input_data.model_validate(data).model_dump()
-                logger.debug("Successfully validated input data")
-            else:
-                parsed_data = data
-
-            logger.debug("Starting metrics extraction")
-            self._flattened_data = self._extract_metrics(parsed_data)
-            return self._flattened_data
-
-        except Exception as e:
-            logger.error(f"Error during flattening: {str(e)}")
-            return None

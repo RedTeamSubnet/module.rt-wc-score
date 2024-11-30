@@ -20,17 +20,6 @@ class MouseDownUpProcessor(BaseFeatureEngineer):
         """
         self.config = config or MouseDownUpConfig()
 
-    def _get_default_results(self) -> Dict[str, Any]:
-        """Get dictionary of default feature values.
-
-        Returns:
-            Dictionary with default values for all features
-        """
-        return {
-            feature_name: self.config.processing.default_value
-            for feature_name in self.config.processing.feature_names.values()
-        }
-
     def __call__(self, mouse_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         """Process mouse down/up events and compute timing features.
 
@@ -54,3 +43,14 @@ class MouseDownUpProcessor(BaseFeatureEngineer):
         except Exception as e:
             logger.error(f"Error processing mouse down/up events: {str(e)}")
             return self._get_default_results()
+
+    def _get_default_results(self) -> Dict[str, Any]:
+        """Get dictionary of default feature values.
+
+        Returns:
+            Dictionary with default values for all features
+        """
+        return {
+            feature_name: self.config.processing.default_value
+            for feature_name in self.config.processing.feature_names.values()
+        }
