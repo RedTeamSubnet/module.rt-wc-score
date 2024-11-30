@@ -513,3 +513,4 @@ outputs/
 site/
 sites/
 pythonpath/
+venv-metrics
