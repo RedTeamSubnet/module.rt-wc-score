@@ -70,6 +70,8 @@ class MetricsProcessor:
 
             return {
                 "success": True,
+                "project_id": processed_features["project_id"],
+                "user_id": processed_features["user_id"],
                 "analysis": analysis_results,
             }
 
