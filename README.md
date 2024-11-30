@@ -1,4 +1,4 @@
-# Metrics Processor
+# RedTeam Scoring
 
 A Python package for processing and analyzing user interaction metrics to detect bot-like behavior. The package processes raw interaction data (mouse movements, keyboard events, checkbox interactions) and provides both feature extraction and bot detection capabilities.
 
@@ -35,12 +35,12 @@ source venv/bin/activate  # On Unix/macOS
 
 ```bash
 # Using SSH
-git clone git@github.com:humblebeeintel/module.ss-metrics-process.git
+git clone git@github.com:InnerWorks-me/module.rt-scoring.git
 
 # OR using HTTPS
-git clone https://github.com/humblebeeintel/module.ss-metrics-process.git
+git clone https://github.com/InnerWorks-me/module.rt-scoring.git
 
-cd module.ss-metrics-process
+cd module.rt-scoring
 ```
 
 2. Install dependencies:
