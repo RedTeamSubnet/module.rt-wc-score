@@ -35,12 +35,12 @@ source venv/bin/activate  # On Unix/macOS
 
 ```bash
 # Using SSH
-git clone git@github.com:InnerWorks-me/module.rt-scoring.git
+git clone git@github.com:RedTeamSubnet/module.rt-wc-score.git
 
 # OR using HTTPS
-git clone https://github.com/InnerWorks-me/module.rt-scoring.git
+git clone https://github.com/RedTeamSubnet/module.rt-wc-score.git
 
-cd module.rt-scoring
+cd module.rt-wc-score
 ```
 
 2. Install dependencies:

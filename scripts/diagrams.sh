@@ -43,7 +43,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-MODULE_NAME="${MODULE_NAME:-metrics_processor}"
+MODULE_NAME="${MODULE_NAME:-rt_wc_score}"
 MODULE_DIR="${MODULE_DIR:-./src/${MODULE_NAME}}"
 OUTPUT_DIR="${OUTPUT_DIR:-./docs/diagrams}"
 
@@ -72,7 +72,7 @@ main()
 					shift;;
 				*)
 					echoError "Failed to parsing input -> ${_input}"
-					echoInfo "USAGE: ${0}  -m=*, --module-name=* [metrics_processor] | -d=*, --module-dir=* [./src/metrics_processor] | -o=*, --output-dir=* [./docs/diagrams]"
+					echoInfo "USAGE: ${0}  -m=*, --module-name=* [rt_wc_score] | -d=*, --module-dir=* [./src/rt_wc_score] | -o=*, --output-dir=* [./docs/diagrams]"
 					exit 1;;
 			esac
 		done

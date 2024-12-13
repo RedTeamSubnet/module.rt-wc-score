@@ -3,7 +3,7 @@
 ## Directory Structure
 
 ```bash
-metrics_processor/
+rt_wc_score/
 ├── __init__.py
 ├── _main.py           # Main MetricsProcessor class
 ├── config.py          # Top-level configuration

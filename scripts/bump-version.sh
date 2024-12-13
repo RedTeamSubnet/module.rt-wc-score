@@ -22,7 +22,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-VERSION_FILE_PATH="${VERSION_FILE_PATH:-./src/metrics_processor/__version__.py}"
+VERSION_FILE_PATH="${VERSION_FILE_PATH:-./src/rt_wc_score/__version__.py}"
 
 
 _BUMP_TYPE=""
