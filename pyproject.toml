@@ -3,20 +3,15 @@ requires = ["setuptools>=70.3.0,<80.0.0", "setuptools-scm>=8.0.4,<9.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "metrics_processor"
-authors = [{ name = "Batkhuu Byambajav", email = "batkhuu10@gmail.com" }]
-description = "'metrics_processor' is a template module for python AI/ML model."
+name = "rt_wc_score"
+authors = [
+	{ name = "Batkhuu Byambajav", email = "batkhuu10@gmail.com" },
+	{ name = "Asadbek Kiyomov", email = "asadbey0331@gmail.com" },
+]
+description = "'rt_wc_score' is a python module that score web challenge."
 readme = "README.md"
 requires-python = ">=3.9,<4.0"
-keywords = [
-	"metrics_processor",
-	"model",
-	"module",
-	"ai/ml/dl",
-	"artificial-intelligence",
-	"machine-learning",
-	"deep-learning",
-]
+keywords = ["rt_wc_score", "model", "module"]
 license = { file = "LICENSE.txt" }
 classifiers = [
 	"Development Status :: 4 - Beta",
@@ -33,19 +28,18 @@ classifiers = [
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["metrics_processor*"]
+# [tool.setuptools.packages.find]
+# where = ["src"]
+# include = ["rt_wc_score*"]
 # namespaces = false
 
 [tool.setuptools.dynamic]
-version = { attr = "metrics_processor.__version__.__version__" }
+version = { attr = "rt_wc_score.__version__.__version__" }
 dependencies = { file = "./requirements.txt" }
-# optional-dependencies.gpu = { file = ["./requirements/requirements.gpu.txt"] }
 
 [project.urls]
-Homepage = "https://github.com/bybatkhuu/model.python-template"
-Documentation = "https://bybatkhuu.github.io/model.python-template"
-Repository = "https://github.com/bybatkhuu/model.python-template.git"
-Issues = "https://github.com/bybatkhuu/model.python-template/issues"
-Changelog = "https://github.com/bybatkhuu/model.python-template/CHANGELOG.md"
+Homepage = "https://github.com/RedTeamSubnet/module.rt-wc-score"
+Documentation = "https://github.com/RedTeamSubnet/module.rt-wc-score/tree/main/docs"
+Repository = "https://github.com/RedTeamSubnet/module.rt-wc-score"
+Issues = "https://github.com/RedTeamSubnet/module.rt-wc-score/issues"
+Changelog = "https://github.com/RedTeamSubnet/module.rt-wc-score/CHANGELOG.md"

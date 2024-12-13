@@ -6,7 +6,7 @@ import json
 import logging
 from pathlib import Path
 
-from metrics_processor import MetricsProcessor
+from rt_wc_score import MetricsProcessor
 
 logger = logging.getLogger(__name__)
 

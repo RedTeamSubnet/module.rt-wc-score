@@ -1,6 +1,6 @@
-# Metrics Processor
+# RT-WC-Score
 
-A Python package for processing and analyzing user interaction metrics to detect bot-like behavior. The package processes raw interaction data (mouse movements, keyboard events, checkbox interactions) and provides both feature extraction and bot detection capabilities.
+A Python package for scoring web challenge data.
 
 ## 🚀 Installation
 

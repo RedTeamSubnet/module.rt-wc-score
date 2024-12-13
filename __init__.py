@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
 try:
-    from .src.metrics_processor import *
+    from .src.rt_wc_score import *
 except ImportError:
-    from src.metrics_processor import *
+    from src.rt_wc_score import *

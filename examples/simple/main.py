@@ -6,7 +6,7 @@ import json
 import logging
 from pathlib import Path
 
-from metrics_processor.modules.preprocessing import Preprocessor
+from rt_wc_score.modules.preprocessing import Preprocessor
 
 logger = logging.getLogger(__name__)
 
