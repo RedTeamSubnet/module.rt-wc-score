@@ -21,30 +21,6 @@ class HeuristicAnalyzer:
         self.config = config or HeuristicConfig()
         self.mouse_analyzer = MouseEventAnalyzer(config=self.config.mouse_events)
 
-    def _calculate_final_score(self, scores: Dict[str, Dict[str, float]]) -> float:
-        """Calculate weighted average score.
-
-        Args:
-            scores: Dictionary containing scores and weights
-
-        Returns:
-            Final weighted score
-        """
-        total_weight = 0
-        weighted_sum = 0
-
-        for analyzer_scores in scores.values():
-            score = analyzer_scores.get("score", 0)
-            weight = analyzer_scores.get("weight", 0)
-
-            weighted_sum += score * weight
-            total_weight += weight
-
-        if total_weight == 0:
-            return 0.0
-
-        return weighted_sum / total_weight
-
     def __call__(self, features: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze features to detect bot-like behavior.
 
@@ -83,3 +59,29 @@ class HeuristicAnalyzer:
                 "score": 0.0,
                 "error": str(e),
             }
+
+
+    def _calculate_final_score(self, scores: Dict[str, Dict[str, float]]) -> float:
+        """Calculate weighted average score.
+
+        Args:
+            scores: Dictionary containing scores and weights
+
+        Returns:
+            Final weighted score
+        """
+        total_weight = 0
+        weighted_sum = 0
+
+        for analyzer_scores in scores.values():
+            score = analyzer_scores.get("score", 0)
+            weight = analyzer_scores.get("weight", 0)
+
+            weighted_sum += score * weight
+            total_weight += weight
+
+        if total_weight == 0:
+            return 0.0
+
+        return weighted_sum / total_weight
+

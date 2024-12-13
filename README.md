@@ -1,4 +1,4 @@
-# RT-WC-Score
+# RedTeam Scoring
 
 A Python package for scoring web challenge data.
 
@@ -35,12 +35,12 @@ source venv/bin/activate  # On Unix/macOS
 
 ```bash
 # Using SSH
-git clone git@github.com:humblebeeintel/module.ss-metrics-process.git
+git clone git@github.com:InnerWorks-me/module.rt-scoring.git
 
 # OR using HTTPS
-git clone https://github.com/humblebeeintel/module.ss-metrics-process.git
+git clone https://github.com/InnerWorks-me/module.rt-scoring.git
 
-cd module.ss-metrics-process
+cd module.rt-scoring
 ```
 
 2. Install dependencies:
@@ -174,6 +174,9 @@ processor = MetricsProcessor(config=config)
     }
 }
 ```
+
+>[!Note]
+> Output will be saved into [data](./data/processed/) folder after process is completed.
 
 ## ⚠️ Error Handling
 

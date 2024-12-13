@@ -1,0 +1,265 @@
+digraph G {
+concentrate=true;
+splines="ortho";
+rankdir="LR";
+subgraph legend{
+    rank = min;
+    label = "legend";
+    Legend [shape=none, margin=0, label = <
+        <table cellspacing="0" cellpadding="0" border="1"><tr><td>Code2flow Legend</td></tr><tr><td>
+        <table cellspacing="0">
+        <tr><td>Regular function</td><td width="50px" bgcolor='#cccccc'></td></tr>
+        <tr><td>Trunk function (nothing calls this)</td><td bgcolor='#966F33'></td></tr>
+        <tr><td>Leaf function (this calls nothing else)</td><td bgcolor='#6db33f'></td></tr>
+        <tr><td>Function call</td><td><font color='black'>&#8594;</font></td></tr>
+        </table></td></tr></table>
+        >];
+}node_9380a361 [label="133: _check_mouse_movements_heuristics()" name="_base::SSHeuristicsManager._check_mouse_movements_heuristics" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_b8488f6f [label="45: _run_all_heuristic_checks()" name="_base::SSHeuristicsManager._run_all_heuristic_checks" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_70426831 [label="25: run()" name="_base::SSHeuristicsManager.run" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_425df28b [label="124: __call__()" name="_checkbox_events::CheckboxEventProcessor.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_d0ad7afb [label="17: __init__()" name="_checkbox_events::CheckboxEventProcessor.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_0959b214 [label="21: _calculate_path_linearity()" name="_checkbox_events::CheckboxEventProcessor._calculate_path_linearity" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_ff8dfe8a [label="46: _process_checkbox_sequence()" name="_checkbox_events::CheckboxEventProcessor._process_checkbox_sequence" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_f3dcdf48 [label="38: __call__()" name="_keyboard_events::KeyboardEventsProcessor.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_57b5d6f4 [label="17: __init__()" name="_keyboard_events::KeyboardEventsProcessor.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_84de163c [label="25: _get_event_count()" name="_keyboard_events::KeyboardEventsProcessor._get_event_count" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_40d6ef76 [label="71: __call__()" name="_main::CheckboxPathAnalyzer.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_72a3d63c [label="14: __init__()" name="_main::CheckboxPathAnalyzer.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_0c8fe028 [label="18: _analyze_click_timing()" name="_main::CheckboxPathAnalyzer._analyze_click_timing" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_53e8240a [label="54: _analyze_distance_ratio()" name="_main::CheckboxPathAnalyzer._analyze_distance_ratio" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_d905df90 [label="32: _analyze_path_linearity()" name="_main::CheckboxPathAnalyzer._analyze_path_linearity" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_da998138 [label="18: __init__()" name="_main::FeatureEngineer.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_6e3c40c4 [label="48: __call__()" name="_main::HeuristicAnalyzer.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_53008ef2 [label="15: __init__()" name="_main::HeuristicAnalyzer.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_f959aebc [label="24: _calculate_final_score()" name="_main::HeuristicAnalyzer._calculate_final_score" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f59f4e6b [label="55: __call__()" name="_main::JsonDataFlattener.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_9558c125 [label="19: __init__()" name="_main::JsonDataFlattener.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_6aabac00 [label="38: _extract_metrics()" name="_main::JsonDataFlattener._extract_metrics" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_6fb0b779 [label="24: _get_nested_value()" name="_main::JsonDataFlattener._get_nested_value" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_13286df6 [label="32: __init__()" name="_main::MetricsProcessor.__init__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_735c6b51 [label="17: __init__()" name="_main::MouseEventAnalyzer.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_530933fc [label="14: __init__()" name="_main::MovementCountAnalyzer.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_badcf781 [label="16: __init__()" name="_main::Preprocessor.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_589b8534 [label="14: __init__()" name="_main::VelocityAnalyzer.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_d43e37a2 [label="34: __call__()" name="_mouse_down_up::MouseDownUpProcessor.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_ce38bb9e [label="15: __init__()" name="_mouse_down_up::MouseDownUpProcessor.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_b47312d1 [label="23: _get_default_results()" name="_mouse_down_up::MouseDownUpProcessor._get_default_results" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_810aedf2 [label="32: __call__()" name="_mouse_movement::MouseMovementProcessor.__call__" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_ae48a79e [label="18: __init__()" name="_mouse_movement::MouseMovementProcessor.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_270906a5 [label="96: _compute_count()" name="_mouse_movement::MouseMovementProcessor._compute_count" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_0c9d4f4e [label="47: _compute_velocity()" name="_mouse_movement::MouseMovementProcessor._compute_velocity" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_5c31427b [label="22: _parse_timestamp()" name="_mouse_movement::MouseMovementProcessor._parse_timestamp" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_b8488f6f -> node_9380a361 [color="#CC79A7" penwidth="2"];
+node_70426831 -> node_b8488f6f [color="#E69F00" penwidth="2"];
+node_425df28b -> node_ff8dfe8a [color="#009E73" penwidth="2"];
+node_ff8dfe8a -> node_0959b214 [color="#56B4E9" penwidth="2"];
+node_f3dcdf48 -> node_84de163c [color="#000000" penwidth="2"];
+node_f3dcdf48 -> node_84de163c [color="#000000" penwidth="2"];
+node_f3dcdf48 -> node_84de163c [color="#000000" penwidth="2"];
+node_40d6ef76 -> node_0c8fe028 [color="#D55E00" penwidth="2"];
+node_40d6ef76 -> node_53e8240a [color="#D55E00" penwidth="2"];
+node_40d6ef76 -> node_d905df90 [color="#D55E00" penwidth="2"];
+node_da998138 -> node_d0ad7afb [color="#000000" penwidth="2"];
+node_da998138 -> node_57b5d6f4 [color="#000000" penwidth="2"];
+node_da998138 -> node_ce38bb9e [color="#000000" penwidth="2"];
+node_da998138 -> node_ae48a79e [color="#000000" penwidth="2"];
+node_6e3c40c4 -> node_f959aebc [color="#F0E442" penwidth="2"];
+node_53008ef2 -> node_735c6b51 [color="#56B4E9" penwidth="2"];
+node_f59f4e6b -> node_6aabac00 [color="#009E73" penwidth="2"];
+node_6aabac00 -> node_6fb0b779 [color="#000000" penwidth="2"];
+node_13286df6 -> node_53008ef2 [color="#D55E00" penwidth="2"];
+node_13286df6 -> node_badcf781 [color="#D55E00" penwidth="2"];
+node_735c6b51 -> node_72a3d63c [color="#E69F00" penwidth="2"];
+node_735c6b51 -> node_530933fc [color="#E69F00" penwidth="2"];
+node_735c6b51 -> node_589b8534 [color="#E69F00" penwidth="2"];
+node_badcf781 -> node_da998138 [color="#E69F00" penwidth="2"];
+node_badcf781 -> node_9558c125 [color="#E69F00" penwidth="2"];
+node_d43e37a2 -> node_b47312d1 [color="#56B4E9" penwidth="2"];
+node_d43e37a2 -> node_b47312d1 [color="#56B4E9" penwidth="2"];
+node_810aedf2 -> node_270906a5 [color="#56B4E9" penwidth="2"];
+node_810aedf2 -> node_0c9d4f4e [color="#56B4E9" penwidth="2"];
+node_0c9d4f4e -> node_5c31427b [color="#D55E00" penwidth="2"];
+subgraph cluster_87c95147 {
+    label="File: _base";
+    name="_base";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_6c11551e {
+        node_70426831 node_b8488f6f node_9380a361;
+        label="Class: SSHeuristicsManager";
+        name="SSHeuristicsManager";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_1aa245cc {
+    label="File: _checkbox_events";
+    name="_checkbox_events";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_1ccd7994 {
+        node_d0ad7afb node_0959b214 node_ff8dfe8a node_425df28b;
+        label="Class: CheckboxEventProcessor";
+        name="CheckboxEventProcessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_d41591fe {
+    label="File: _keyboard_events";
+    name="_keyboard_events";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_30629c64 {
+        node_57b5d6f4 node_84de163c node_f3dcdf48;
+        label="Class: KeyboardEventsProcessor";
+        name="KeyboardEventsProcessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_97a7d3ca {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_97ff1fa4 {
+        node_13286df6;
+        label="Class: MetricsProcessor";
+        name="MetricsProcessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_cde372e6 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_fa8d5954 {
+        node_53008ef2 node_f959aebc node_6e3c40c4;
+        label="Class: HeuristicAnalyzer";
+        name="HeuristicAnalyzer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_1033f708 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_e59d9e98 {
+        node_735c6b51;
+        label="Class: MouseEventAnalyzer";
+        name="MouseEventAnalyzer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_4257acf7 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_bb3d08b2 {
+        node_72a3d63c node_0c8fe028 node_d905df90 node_53e8240a node_40d6ef76;
+        label="Class: CheckboxPathAnalyzer";
+        name="CheckboxPathAnalyzer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_05c5399b {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_ef01402b {
+        node_530933fc;
+        label="Class: MovementCountAnalyzer";
+        name="MovementCountAnalyzer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_ddf10e24 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_eb2ac2df {
+        node_589b8534;
+        label="Class: VelocityAnalyzer";
+        name="VelocityAnalyzer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_a6717bd9 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_408205f5 {
+        node_badcf781;
+        label="Class: Preprocessor";
+        name="Preprocessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_d36c98d0 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_217b7fad {
+        node_da998138;
+        label="Class: FeatureEngineer";
+        name="FeatureEngineer";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_4aa7dfe0 {
+    label="File: _main";
+    name="_main";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_8283756c {
+        node_9558c125 node_6fb0b779 node_6aabac00 node_f59f4e6b;
+        label="Class: JsonDataFlattener";
+        name="JsonDataFlattener";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_b4fb2eaa {
+    label="File: _mouse_down_up";
+    name="_mouse_down_up";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_9e781768 {
+        node_ce38bb9e node_b47312d1 node_d43e37a2;
+        label="Class: MouseDownUpProcessor";
+        name="MouseDownUpProcessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_bc2118d9 {
+    label="File: _mouse_movement";
+    name="_mouse_movement";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_a539c5fd {
+        node_ae48a79e node_5c31427b node_810aedf2 node_0c9d4f4e node_270906a5;
+        label="Class: MouseMovementProcessor";
+        name="MouseMovementProcessor";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+}

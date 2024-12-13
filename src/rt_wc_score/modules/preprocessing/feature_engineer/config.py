@@ -28,4 +28,5 @@ class FeatureEngineerConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True

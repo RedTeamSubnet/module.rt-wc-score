@@ -8,16 +8,19 @@ class ExtraBaseModel(BaseModel):
     """Base model with extra configuration."""
 
     class Config:
+        """ Pydantic configuration."""
         extra = "allow"
 
 
 class MouseMovement(BaseModel):
+    """ Mouse movement data."""
     x: int
     y: int
     timestamp: str
 
 
 class MouseMetrics(BaseModel):
+    """ Mouse metrics data."""
     movements: List[MouseMovement] = []
     clicks: List[dict] = []
     mouseDowns: List[dict] = []
@@ -25,6 +28,7 @@ class MouseMetrics(BaseModel):
 
 
 class KeyboardMetrics(BaseModel):
+    """ Keyboard metrics data."""
     keypresses: List[dict] = []
     keydowns: List[dict] = []
     keyups: List[dict] = []
@@ -32,17 +36,20 @@ class KeyboardMetrics(BaseModel):
 
 
 class SignInButtonMetrics(BaseModel):
+    """ Sign-in button metrics data."""
     hoverToClickTime: Optional[float] = None
     mouseLeaveCount: int = 0
 
 
 class Metrics(BaseModel):
+    """ Metrics data."""
     mouse: MouseMetrics = Field(default_factory=MouseMetrics)
     keyboard: KeyboardMetrics = Field(default_factory=KeyboardMetrics)
     signInButton: SignInButtonMetrics = Field(default_factory=SignInButtonMetrics)
 
 
 class InputData(BaseModel):
+    """ Input data for JSON flattening."""
     project_id: Optional[str] = None
     user_id: Optional[str] = None
     metrics: Metrics = Field(default_factory=Metrics)
@@ -70,6 +77,7 @@ _FIELD_MAPPING = {
 
 
 class JsonDataFlattenerConfigPM(ExtraBaseModel):
+    """ Configuration for JSON data flattening."""
     field_mapping: Dict[str, List[str]] = Field(default_factory=lambda: _FIELD_MAPPING)
     input_data: InputData = Field(default_factory=InputData)
     is_validate: bool = Field(default=False)

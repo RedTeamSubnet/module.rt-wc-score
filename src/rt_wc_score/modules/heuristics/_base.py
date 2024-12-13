@@ -43,6 +43,7 @@ class SSHeuristicsManager:
         return heuristics_df
 
     def _run_all_heuristic_checks(self):
+        """ Runs all heuristic checks and concatenates the results into a single DataFrame."""
         retriever = Retriever(data=self._input_df)
         self._input_df["DFP_nav_client_hints_br"] = retriever.retrieve(
             "DFP_nav_client_hints_br"
@@ -131,7 +132,7 @@ class SSHeuristicsManager:
     #     return screen_size_heur_checks_df[new_cols]
 
     def _check_mouse_movements_heuristics(self, mask):
-
+        """ Runs all heuristic checks related to mouse movements and concatenates the results into a single DataFrame."""
         mouse_movements_df = MouseMovementsHeursiticsCheck().check(
             self._input_df[
                 [
@@ -151,7 +152,7 @@ class SSHeuristicsManager:
         return pd.concat([mouse_movements_df, mouse_movements_df], axis=1)
 
     def _check_touch_events_heuristics(self, mask):
-
+        """ Runs all heuristic checks related to touch events and concatenates the results into a single DataFrame."""
         touch_events_checks_df = TouchEventsHeursiticsCheck().check(
             self._input_df[
                 [

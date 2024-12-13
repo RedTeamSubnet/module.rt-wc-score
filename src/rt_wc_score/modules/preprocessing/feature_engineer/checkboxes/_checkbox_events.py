@@ -18,6 +18,29 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
         """Initialize the processor."""
         self.config = config or CheckboxFeatureConfig()
 
+    def __call__(self, data: Dict[str, List[Dict]]) -> Dict[str, Any]:
+        """Process checkbox events and extract features.
+
+        Args:
+            data: Dictionary containing checkbox and mouse movement data
+
+        Returns:
+            Dictionary containing extracted features
+        """
+        try:
+            checkboxes = data.get(self.config.input_field, [])
+            mouse_movements = data.get("mouse_movements", [])
+
+            if not checkboxes:
+                logger.warning("No checkbox events found")
+                return {}
+
+            return self._process_checkbox_sequence(checkboxes, mouse_movements)
+
+        except Exception as e:
+            logger.error(f"Error processing checkbox events: {str(e)}")
+            return {}
+
     def _calculate_path_linearity(self, path: List[Dict[str, Any]]) -> float:
         """Calculate how linear a path is between points.
 
@@ -120,25 +143,3 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
         )
 
         return features
-
-    def __call__(self, data: Dict[str, List[Dict]]) -> Dict[str, Any]:
-        """Process checkbox events and extract features.
-
-        Args:
-            data: Dictionary containing checkbox and mouse movement data
-
-        Returns:
-            Dictionary containing extracted features
-        """
-        try:
-            checkboxes = data.get(self.config.input_field, [])
-            mouse_movements = data.get("mouse_movements", [])
-
-            if not checkboxes:
-                return {}
-
-            return self._process_checkbox_sequence(checkboxes, mouse_movements)
-
-        except Exception as e:
-            logger.error(f"Error processing checkbox events: {str(e)}")
-            return {}

@@ -7,6 +7,10 @@ from .mouse_events.config import MouseEventConfig
 class HeuristicConfig(BaseModel):
     """Main configuration for heuristic analysis."""
 
+    class Config:
+        """ Pydantic configuration."""
+        frozen = True
+
     mouse_events: MouseEventConfig = Field(
         default_factory=MouseEventConfig,
         description="Configuration for mouse event analysis",
@@ -14,6 +18,3 @@ class HeuristicConfig(BaseModel):
     score_threshold: float = Field(
         default=0.65, description="Threshold for bot classification (>threshold = bot)"
     )
-
-    class Config:
-        frozen = True

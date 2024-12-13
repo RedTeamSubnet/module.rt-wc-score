@@ -19,16 +19,6 @@ class MouseMovementProcessor(BaseFeatureEngineer):
         """Initialize the processor with configuration."""
         self.config = config or MouseMovementConfig()
 
-    def _parse_timestamp(self, timestamp_str: str) -> float:
-        """Parse timestamp string to float."""
-        try:
-            if isinstance(timestamp_str, (int, float)):
-                return float(timestamp_str)
-            return parse(timestamp_str).timestamp()
-        except (ValueError, TypeError) as e:
-            logger.error(f"Error parsing timestamp {timestamp_str}: {str(e)}")
-            return np.nan
-
     def __call__(self, mouse_movement_data: List[Dict]) -> Dict[str, float]:
         """Process mouse movement data and compute velocity features."""
         try:
@@ -44,9 +34,20 @@ class MouseMovementProcessor(BaseFeatureEngineer):
             logger.error(f"Error computing mouse movement features: {str(e)}")
             return {self.config.processing.velocity_feature_name: np.nan}
 
+    def _parse_timestamp(self, timestamp_str: str) -> float:
+        """Parse timestamp string to float."""
+        try:
+            if isinstance(timestamp_str, (int, float)):
+                return float(timestamp_str)
+            return parse(timestamp_str).timestamp()
+        except (ValueError, TypeError) as e:
+            logger.error(f"Error parsing timestamp {timestamp_str}: {str(e)}")
+            return np.nan
+
     def _compute_velocity(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
         if not mouse_movements:
+            logger.warning("Empty mouse movement data to compute velocity")
             return []
 
         try:
@@ -96,6 +97,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
     def _compute_count(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
         if not mouse_movements:
+            logger.warning("Empty mouse movement data to compute count")
             return []
         else:
             return len(mouse_movements)

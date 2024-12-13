@@ -23,6 +23,7 @@ class MouseMovementProcessingConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True
 
 
@@ -38,6 +39,7 @@ class MouseMovementConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True
 
 
@@ -56,6 +58,7 @@ class MouseDownUpProcessingConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True
 
 
@@ -74,4 +77,5 @@ class MouseDownUpConfig(BaseModel):
     )
 
     class Config:
+        """ Pydantic configuration."""
         frozen = True

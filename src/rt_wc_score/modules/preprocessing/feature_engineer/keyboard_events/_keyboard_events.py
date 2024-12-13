@@ -22,19 +22,6 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
         """
         self.config = config or KeyboardConfig()
 
-    def _get_event_count(self, events: List[Dict] | None) -> float:
-        """Get count of events with validation.
-
-        Args:
-            events: List of keyboard events
-
-        Returns:
-            Count of events or default value if invalid
-        """
-        if not isinstance(events, list):
-            return self.config.processing.default_value
-        return len(events)
-
     def __call__(self, events: Dict[str, List[Dict]]) -> Dict[str, float]:
         """Process keyboard events and compute count features.
 
@@ -64,3 +51,17 @@ class KeyboardEventsProcessor(BaseFeatureEngineer):
                 name: self.config.processing.default_value
                 for name in self.config.processing.feature_names.values()
             }
+
+    def _get_event_count(self, events: List[Dict] | None) -> float:
+        """Get count of events with validation.
+
+        Args:
+            events: List of keyboard events
+
+        Returns:
+            Count of events or default value if invalid
+        """
+        if not isinstance(events, list):
+            logger.warning("Invalid keyboard events data type to process count")
+            return self.config.processing.default_value
+        return len(events)
