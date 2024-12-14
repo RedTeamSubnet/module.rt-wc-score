@@ -134,28 +134,27 @@ config = HeuristicConfig(
 #### Strict Detection
 
 ```python
-config = HeuristicConfig(
-    score_threshold=0.55,  # Lower threshold
-    mouse_events=MouseEventConfig(
-        checkbox_path=CheckboxPathConfig(
-            min_expected_time=0.4,  # Require slower interactions
-            max_linearity_threshold=0.8  # Less tolerance for straight paths
-        )
-    )
-)
-```
-
-#### Lenient Detection
-
-```python
-config = HeuristicConfig(
-    score_threshold=0.75,  # Higher threshold
-    mouse_events=MouseEventConfig(
-        checkbox_path=CheckboxPathConfig(
-            min_expected_time=0.2,  # Allow faster interactions
-            max_linearity_threshold=0.9  # More tolerance for straight paths
-        )
-    )
+HeuristicConfig(
+    mouse_events={
+        "velocity": {
+            "min_velocity_variation": 200.0,   # Minimum expected velocity standard deviation
+            "max_velocity_variation": 3000.0,  # Maximum expected velocity standard deviation
+            "weight": 1.0,                     # Weight for velocity analysis
+        },
+        "movement_count": {
+            "min_movement_count": 15,          # Minimum expected mouse movements
+            "max_movement_count":2000,         # Maximum expected mouse movements
+            "weight": 0.8,                     # Weight for movement count analysis
+        },
+        "checkbox_path": {
+            "min_expected_time": 0.3,          # "Minimum expected time between checkbox clicks (seconds)
+            "max_linearity_threshold": 0.85,   # Threshold for suspiciously linear paths
+            "min_movement_count": 8,           # Minimum expected movements between checkboxes
+            "max_distance_ratio": 1.4,         # Maximum ratio of path distance to direct distance
+            "weight": 1.5,                     # Weight for checkbox path analysis
+        },
+    },
+    score_threshold=0.65,                      # Threshold for bot classification (>threshold = bot)
 )
 ```
 
