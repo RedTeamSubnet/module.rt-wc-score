@@ -35,10 +35,12 @@ class HeuristicAnalyzer:
             mouse_scores = self.mouse_analyzer(features)
 
             # Calculate final score
-            final_score = round(self._calculate_final_score(mouse_scores), 5)
+
+            final_score = round(1 - self._calculate_final_score(mouse_scores) ,5)
+
 
             # Determine if it's bot-like based on threshold
-            is_bot = int(final_score > self.config.score_threshold)
+            is_bot = int(final_score < self.config.score_threshold)
 
             # Calculate confidence based on score distance from threshold
             confidence = abs(final_score - self.config.score_threshold)

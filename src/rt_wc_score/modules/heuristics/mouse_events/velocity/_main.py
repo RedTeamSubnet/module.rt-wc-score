@@ -17,7 +17,6 @@ class VelocityAnalyzer:
         try:
 
             stddev_velocity = features.get("mouse_movement_stddev_velocity", 0.0)
-            print("stddev_velocity",stddev_velocity)
             score = round(
                 self.scoring_function(
                     stddev_velocity,
