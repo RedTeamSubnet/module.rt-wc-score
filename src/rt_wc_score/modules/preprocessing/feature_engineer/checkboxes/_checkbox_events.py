@@ -131,9 +131,11 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
         """
         sorted_checkboxes = sorted(checkboxes, key=lambda x: parse(x["timestamp"]))
         features = {
+            "is_valid" : False,
             "checkbox":[]
         }
-
+        if len(sorted_checkboxes) < 3:
+            return features
         for i in range(len(sorted_checkboxes) - 1):
             checkbox = {}
             current = sorted_checkboxes[i]
@@ -187,4 +189,5 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
                 }
             )
             features["checkbox"].append(checkbox)
+            features["is_valid"] = True
         return features

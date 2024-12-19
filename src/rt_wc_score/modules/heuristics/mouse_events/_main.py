@@ -29,10 +29,13 @@ class MouseEventAnalyzer:
     def __call__(self, features: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze mouse features for bot detection."""
         try:
+
             velocity_score = self.velocity_analyzer(features)
             movement_count_score = self.movement_count_analyzer(features)
             checkbox_path_score = self.checkbox_path_analyzer(features)
-
+            checkbox_getter = features.get("checkbox")
+            if checkbox_getter is None:
+                velocity_score ,movement_count_score , checkbox_path_score = 1, 1, 1
             return {
                 "velocity": {
                     "score": velocity_score,

@@ -10,8 +10,8 @@ class MovementCountConfig(BaseModel):
     min_movement_count: int = Field(
         default=50, description="Minimum expected mouse movements"
     )
-    min_movement_count_hard: int = Field(
-        default=10, description="Minimum mouse movement count to consider user as bot"
+    min_movement_count_too_low: int = Field(
+        default=5, description="Minimum mouse movement count to consider user as bot"
     )
     max_movement_count: int = Field(
         default=800, description="Maximum expected mouse movements"
