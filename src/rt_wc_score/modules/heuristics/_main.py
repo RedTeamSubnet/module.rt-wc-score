@@ -35,7 +35,7 @@ class HeuristicAnalyzer:
             mouse_scores = self.mouse_analyzer(features)
 
             # Calculate final score
-            final_score = round(self._calculate_final_score(mouse_scores) ,5)
+            final_score = round(self._calculate_final_score(mouse_scores), 5)
 
             # Determine if it's bot-like based on threshold
             is_bot = int(final_score > self.config.score_threshold)
@@ -54,9 +54,9 @@ class HeuristicAnalyzer:
         except Exception as e:
             logger.error(f"Error in heuristic analysis: {str(e)}", exc_info=True)
             return {
-                "is_bot": 0,  # Default to human on error
-                "confidence": 0.0,
-                "score": 0.0,
+                "is_bot": 1,  # Default to human on error
+                "confidence": 1.0,
+                "score": 1.0,
                 "error": str(e),
             }
 
