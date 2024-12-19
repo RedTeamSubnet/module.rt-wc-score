@@ -94,6 +94,7 @@
 	"search.showLineNumbers": true,
 	"search.useIgnoreFiles": false,
 	"search.exclude": {
+		"docs/diagrams/":true,
 		"**/*.code-search": true,
 		"**/.git": true,
 		"**/.svn": true,

@@ -35,7 +35,7 @@ class HeuristicAnalyzer:
             mouse_scores = self.mouse_analyzer(features)
 
             # Calculate final score
-            final_score = self._calculate_final_score(mouse_scores)
+            final_score = round(self._calculate_final_score(mouse_scores) ,5)
 
             # Determine if it's bot-like based on threshold
             is_bot = int(final_score > self.config.score_threshold)
@@ -60,7 +60,6 @@ class HeuristicAnalyzer:
                 "error": str(e),
             }
 
-
     def _calculate_final_score(self, scores: Dict[str, Dict[str, float]]) -> float:
         """Calculate weighted average score.
 
@@ -84,4 +83,3 @@ class HeuristicAnalyzer:
             return 0.0
 
         return weighted_sum / total_weight
-

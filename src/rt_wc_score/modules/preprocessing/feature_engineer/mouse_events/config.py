@@ -6,7 +6,7 @@ class MouseMovementProcessingConfig(BaseModel):
     """Processing-specific configuration for mouse movement analysis."""
 
     min_movements_required: int = Field(
-        default=2,
+        default=10,
         description="Minimum number of movements required to compute velocity",
     )
     fields: dict = Field(

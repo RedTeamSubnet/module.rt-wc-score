@@ -26,7 +26,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
             count = self._compute_count(mouse_movement_data)
             return {
                 self.config.processing.velocity_feature_name: (
-                    np.std(velocities) if velocities else np.nan
+                    np.std(velocities) if velocities else 0
                 ),
                 self.config.processing.movements_count_feature_name: count,
             }
@@ -46,6 +46,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
 
     def _compute_velocity(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
+        self.x_vel(mouse_movements)
         if not mouse_movements:
             logger.warning("Empty mouse movement data to compute velocity")
             return []
@@ -55,6 +56,7 @@ class MouseMovementProcessor(BaseFeatureEngineer):
 
             if len(valid_movements) < self.config.processing.min_movements_required:
                 return []
+            valid_movements = sorted(valid_movements,  key=lambda x: parse(x["timestamp"]))
 
             x_coords = np.array(
                 [m.get(self.config.processing.fields["x"]) for m in valid_movements]
@@ -84,6 +86,10 @@ class MouseMovementProcessor(BaseFeatureEngineer):
             dt = np.diff(timestamps)
 
             distances = np.sqrt(dx**2 + dy**2)
+
+            # Get count of zero distances
+            zero_distance_count = len(distances[distances == 0])
+
             velocities = np.divide(
                 distances, dt, out=np.zeros_like(distances), where=dt != 0
             )
@@ -93,7 +99,50 @@ class MouseMovementProcessor(BaseFeatureEngineer):
         except Exception as e:
             logger.error(f"Error in velocity computation: {str(e)}")
             return []
+    def x_vel(self,mouse_movements: List[Dict]) -> List[float]:
+        if not mouse_movements:
+            logger.warning("Empty mouse movement data to compute velocity")
+            return []
+        try:
+            valid_movements = [m for m in mouse_movements if m is not None]
 
+            if len(valid_movements) < self.config.processing.min_movements_required:
+                return []
+            valid_movements = sorted(valid_movements,  key=lambda x: parse(x["timestamp"]))
+            x_coords = np.array(
+                [m.get(self.config.processing.fields["x"]) for m in valid_movements]
+            )
+            y_coords = np.array(
+                [m.get(self.config.processing.fields["y"]) for m in valid_movements]
+            )
+            timestamps = np.array(
+                [
+                    self._parse_timestamp(
+                        m.get(self.config.processing.fields["timestamp"])
+                    )
+                    for m in valid_movements
+                ]
+            )
+
+            if (
+                np.isnan(x_coords).any()
+                or np.isnan(y_coords).any()
+                or np.isnan(timestamps).any()
+            ):
+                logger.warning("Invalid values found in movement data")
+                return []
+            # Calculate x coordinate differences
+            distances = np.diff(x_coords).astype(float)
+            # Calculate time differences
+            dt = np.diff(timestamps)
+            # Compute x velocity by dividing distance by time, handling zero time differences
+            velocities = np.divide(
+                distances, dt, out=np.zeros_like(distances, dtype=float), where=dt != 0
+            )
+            return velocities.tolist()
+        except Exception as e:
+            logger.error(f"Error in velocity computation: {str(e)}")
+            return []
     def _compute_count(self, mouse_movements: List[Dict]) -> List[float]:
         """Compute velocities from mouse movement data."""
         if not mouse_movements:
