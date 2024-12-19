@@ -12,7 +12,7 @@ class CheckboxPathConfig(BaseModel):
         default=0.85, description="Threshold for suspiciously linear paths"
     )
     min_movement_count: int = Field(
-        default=8, description="Minimum expected movements between checkboxes"
+        default=20, description="Minimum expected movements between checkboxes"
     )
     max_distance_ratio: float = Field(
         default=1.4, description="Maximum ratio of path distance to direct distance"

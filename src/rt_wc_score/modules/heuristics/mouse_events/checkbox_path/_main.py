@@ -3,6 +3,7 @@
 import logging
 from typing import Dict, Any, Optional
 
+import numpy as np
 from .config import CheckboxPathConfig
 
 logger = logging.getLogger(__name__)
@@ -28,31 +29,28 @@ class CheckboxPathAnalyzer:
             max_suspicion_score = 0.0
             pairs_analyzed = 0
 
-            # Analyze each consecutive checkbox pair
-            for i in range(1, 4):  # Assuming 3 checkboxes for now
-                for j in range(i + 1, 4):
-                    pair_key = f"checkbox_{i}_{j}"
+            for feature in features["checkbox"]:
+                time_diff = feature.get("time_diff")
+                linearity = feature.get("path_linearity")
+                distance_ratio = feature.get("distance_ratio")
+                movement_count = feature.get("movement_count")
+                avg_angle_degrees = feature.get("avg_angle_degrees")
+                print("linearity", linearity,"avg_angle_degrees", avg_angle_degrees)
+                if all(
+                    v is not None
+                    for v in [time_diff, linearity, distance_ratio, movement_count]
+                ):
+                    # Calculate suspicion scores for different aspects
+                    timing_score = self._analyze_click_timing(time_diff)
+                    linearity_score = self._analyze_path_linearity(
+                        linearity, movement_count
+                    )
+                    distance_score = self._analyze_distance_ratio(distance_ratio)
 
-                    time_diff = features.get(f"{pair_key}_time_diff")
-                    linearity = features.get(f"{pair_key}_path_linearity")
-                    distance_ratio = features.get(f"{pair_key}_distance_ratio")
-                    movement_count = features.get(f"{pair_key}_movement_count")
-
-                    if all(
-                        v is not None
-                        for v in [time_diff, linearity, distance_ratio, movement_count]
-                    ):
-                        # Calculate suspicion scores for different aspects
-                        timing_score = self._analyze_click_timing(time_diff)
-                        linearity_score = self._analyze_path_linearity(
-                            linearity, movement_count
-                        )
-                        distance_score = self._analyze_distance_ratio(distance_ratio)
-
-                        # Take the maximum suspicion score for this pair
-                        pair_score = max(timing_score, linearity_score, distance_score)
-                        max_suspicion_score = max(max_suspicion_score, pair_score)
-                        pairs_analyzed += 1
+                    # Take the maximum suspicion score for this pair
+                    pair_score = max(timing_score, linearity_score, distance_score)
+                    max_suspicion_score = max(max_suspicion_score, pair_score)
+                    pairs_analyzed += 1
 
             if pairs_analyzed == 0:
                 return 0.0
@@ -72,6 +70,7 @@ class CheckboxPathAnalyzer:
         Returns:
             Suspicion score for timing (0-1)
         """
+
         if time_diff < self.config.min_expected_time:
             # Too fast to be human
             return 1.0
@@ -87,6 +86,7 @@ class CheckboxPathAnalyzer:
         Returns:
             Suspicion score for path linearity (0-1)
         """
+
         if movement_count < self.config.min_movement_count:
             if linearity > self.config.max_linearity_threshold:
                 # Too straight with too few movements
@@ -108,6 +108,7 @@ class CheckboxPathAnalyzer:
         Returns:
             Suspicion score for distance ratio (0-1)
         """
+
         if ratio <= 1.0:
             # Perfect or near-perfect path following
             return 0.8
@@ -115,3 +116,29 @@ class CheckboxPathAnalyzer:
             # Suspiciously efficient path
             return 0.5
         return 0.0
+
+    def scoring_function(self, count, min_, max_, min_score=0.80, max_score=0.65):
+        if count < min_:
+            distance_factor = (min_ - count) / min_
+            base_score = min_score + (1 - min_score) * distance_factor
+            return min(1, base_score + np.cos(count) * 0.0084)
+        elif count > max_:
+            distance_factor = (count - max_) / max_
+            base_score = max_score + (1 - max_score) * distance_factor
+            return min(1, base_score + np.cos(count) * 0.0084)
+        elif count == min_:
+            return min_score
+        elif count == max_:
+            return max_score
+        else:
+            return 0
+
+    def scoring_function_min(self, count, min_, min_score=0.80):
+        if count < min_:
+            distance_factor = (min_ - count) / min_
+            base_score = min_score + (1 - min_score) * distance_factor
+            return min(1, base_score + np.cos(count) * 0.0084)
+        elif count == min_:
+            return min_score
+        else:
+            return 0

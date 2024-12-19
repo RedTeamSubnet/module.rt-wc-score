@@ -4,7 +4,6 @@ import logging
 from typing import Dict, List, Any, Optional
 import numpy as np
 from dateutil.parser import parse
-
 from .._base import BaseFeatureEngineer
 from .config import CheckboxFeatureConfig
 
@@ -41,30 +40,83 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
             logger.error(f"Error processing checkbox events: {str(e)}")
             return {}
 
-    def _calculate_path_linearity(self, path: List[Dict[str, Any]]) -> float:
-        """Calculate how linear a path is between points.
-
-        Args:
-            path: List of points with x, y coordinates
-
-        Returns:
-            Linearity score (0-1, where 1 is perfectly linear)
-        """
-        if len(path) < 3:
-            return 1.0  # Not enough points to determine non-linearity
-
-        # Convert to numpy arrays for easier calculation
+    def _calculate_path_linearity(self, path: List[Dict[str, Any]]) -> tuple[float, float]:
+        # Need at least 5 points for the new calculation method
+        if len(path) < 5:
+            return 1.0, 0.0
         points = np.array([[p["x"], p["y"]] for p in path])
 
-        # Calculate total path length
-        path_length = np.sum(np.sqrt(np.sum(np.diff(points, axis=0) ** 2, axis=1)))
+        # Calculate angles between consecutive segments using 5 points
+        angles = []
+        for i in range(len(points) - 2):
+            p1, p2, p3 = points[i : i + 3]
 
-        # Calculate direct distance between endpoints
-        direct_distance = np.sqrt(np.sum((points[-1] - points[0]) ** 2))
+            # Vectors between points
+            v1 = p2 - p1
+            v2 = p3 - p2
 
-        # Linearity score: ratio of direct distance to path length
-        # Will be 1.0 for perfectly straight line, less for curved paths
-        return direct_distance / path_length if path_length > 0 else 1.0
+            # Calculate angle between vectors
+            dot_product = np.dot(v1, v2)
+            norms = np.linalg.norm(v1) * np.linalg.norm(v2)
+
+            if norms > 0:
+                cos_angle = dot_product / norms
+                # Ensure cos_angle is within [-1, 1] to avoid numerical errors
+                cos_angle = min(1, max(-1, cos_angle))
+                angle = np.arccos(cos_angle)
+                angles.append(abs(angle))
+            else:
+                angles.append(1.0)
+
+        # Calculate point-to-line distances
+        start_point = points[0]
+        end_point = points[-1]
+        path_vector = end_point - start_point
+        path_length = np.linalg.norm(path_vector)
+
+        if path_length < 1e-10:  # Add small threshold
+            return 0.0, 0.0
+
+        # Calculate perpendicular distances from points to the line
+        distances = []
+        for point in points[1:-1]:
+            v = point - start_point
+            proj = np.dot(v, path_vector) / path_length
+            parallel_point = start_point + (proj / path_length) * path_vector
+            distance = np.linalg.norm(point - parallel_point)
+            distances.append(distance)
+
+        # Safely calculate angle consistency
+        if angles:  # Check if angles list is not empty
+            angle_consistency = 1 - (np.mean(angles) / np.pi)
+            avg_angle = np.mean(angles)
+        else:
+            angle_consistency = 1.0
+            avg_angle = 0.0
+
+        # Safely calculate distance score
+        if distances:  # Check if distances list is not empty
+            max_allowed_distance = max(path_length * 0.1, 1e-10)  # Add minimum threshold
+            distance_score = 1 - min(1, np.mean(distances) / max_allowed_distance)
+        else:
+            distance_score = 1.0
+
+        # Calculate straightness with safety check
+        total_segment_length = sum(
+            np.linalg.norm(points[i + 1] - points[i]) for i in range(len(points) - 1)
+        )
+
+        if total_segment_length > 1e-10:  # Add small threshold
+            straightness = path_length / total_segment_length
+        else:
+            straightness = 1.0
+
+        # Combine scores with weights
+        linearity_score = (
+            0.4 * angle_consistency + 0.3 * distance_score + 0.3 * straightness
+        )
+
+        return linearity_score, avg_angle
 
     def _process_checkbox_sequence(
         self, checkboxes: List[Dict], mouse_movements: List[Dict]
@@ -78,10 +130,12 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
             Dictionary of extracted features
         """
         sorted_checkboxes = sorted(checkboxes, key=lambda x: parse(x["timestamp"]))
-
-        features = {}
+        features = {
+            "checkbox":[]
+        }
 
         for i in range(len(sorted_checkboxes) - 1):
+            checkbox = {}
             current = sorted_checkboxes[i]
             next_cb = sorted_checkboxes[i + 1]
 
@@ -95,7 +149,12 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
             ]
 
             if movements_between:
-                linearity = self._calculate_path_linearity(movements_between)
+                sorted_movements = sorted(
+                    movements_between, key=lambda x: parse(x["timestamp"])
+                )
+                linearity, avg_angle_degrees = self._calculate_path_linearity(
+                    sorted_movements
+                )
             else:
                 linearity = 1.0  # Default to 1 if no movements
 
@@ -115,31 +174,17 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
                 )
             else:
                 path_distance = direct_distance
-
             # Store features for this pair
-            pair_key = f"checkbox_{current['checkboxId']}_{next_cb['checkboxId']}"
-            features.update(
+            checkbox.update(
                 {
-                    f"{pair_key}_time_diff": time_diff,
-                    f"{pair_key}_path_linearity": linearity,
-                    f"{pair_key}_distance_ratio": (
+                    "time_diff": time_diff,
+                    "path_linearity": linearity,
+                    "distance_ratio": (
                         path_distance / direct_distance if direct_distance > 0 else 1.0
                     ),
-                    f"{pair_key}_movement_count": len(movements_between),
+                    "movement_count": len(movements_between),
+                    "avg_angle_degrees": avg_angle_degrees,
                 }
             )
-
-        # Add sequence features
-        features.update(
-            {
-                "checkbox_interaction_sequence": "_".join(
-                    str(cb["checkboxId"]) for cb in sorted_checkboxes
-                ),
-                "total_checkbox_time": (
-                    parse(sorted_checkboxes[-1]["timestamp"])
-                    - parse(sorted_checkboxes[0]["timestamp"])
-                ).total_seconds(),
-            }
-        )
-
+            features["checkbox"].append(checkbox)
         return features
