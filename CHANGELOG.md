@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.1.2 (2024-12-19)
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.1.2 -->
+
+## What's Changed
+### 💬 Other
+* 🔧 Update heuristic configuration for mouse movement analysis and adjust logging level in CheckboxEventProcessor by @aliyuldashev in https://github.com/RedTeamSubnet/module.rt-wc-score/pull/4
+
+
+**Full Changelog**: https://github.com/RedTeamSubnet/module.rt-wc-score/compare/v1.1.1...v1.1.2
+
 ## v1.1.1 (2024-12-19)
 
 <!-- Release notes generated using configuration in .github/release.yml at v1.1.1 -->
