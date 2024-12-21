@@ -495,6 +495,7 @@ version.py
 sample.py
 example.py
 test.py
+**ToDo.md
 # Directories:
 data/
 dataset/
@@ -513,3 +514,4 @@ site/
 sites/
 pythonpath/
 venv-metrics
+notebooks/

@@ -13,25 +13,25 @@ The heuristics module analyzes preprocessed features to detect bot-like behavior
 - Detects suspicious velocity patterns
 - Analyzes movement consistency
 - Thresholds:
-    - `min_velocity_variation`: 200.0 (too constant if below)
-    - `max_velocity_variation`: 3000.0 (too erratic if above)
+    - `min_velocity_variation`: 1000.0 (too constant if below)
+    - `max_velocity_variation`: 2500.0 (too erratic if above)
 
 #### 2. Movement Count Analysis
 
 - Evaluates quantity of movements
 - Analyzes distribution patterns
 - Thresholds:
-    - `min_movement_count`: 15 (suspicious if below)
-    - `max_movement_count`: 2000 (suspicious if above)
+    - `min_movement_count`: 100 (suspicious if below)
+    - `max_movement_count`: 700 (suspicious if above)
 
 #### 3. Checkbox Path Analysis
 
 - Analyzes paths between checkbox interactions
 - Evaluates timing and movement patterns
 - Thresholds:
-    - `min_expected_time`: 0.3s (too fast if below)
-    - `max_linearity_threshold`: 0.85 (too straight if above)
-    - `min_movement_count`: 8 (between checkboxes)
+    - `min_expected_time`: 1s (too fast if below)
+    - `max_linearity_threshold`: 0.95 (too straight if above)
+    - `min_movement_count`: 20 (between checkboxes)
 
 ## Scoring System
 
@@ -39,16 +39,16 @@ The heuristics module analyzes preprocessed features to detect bot-like behavior
 
 Each analyzer produces a score between 0 and 1:
 
-- 0.0: Human-like behavior
-- 1.0: Most bot-like behavior
+- 1.0: Human-like behavior
+- 0.0: Most bot-like behavior
 
 ```python
 # Example scoring ranges
 scores = {
-    'highly_suspicious': 0.8 - 1.0,
-    'moderately_suspicious': 0.6 - 0.8,
-    'slightly_suspicious': 0.4 - 0.6,
-    'likely_human': 0.0 - 0.4
+    'highly_suspicious': 0.0 - 2.0,
+    'moderately_suspicious': 0.4 - 0.6,
+    'slightly_suspicious': 0.6 - 0.8,
+    'likely_human': 0.8 - 1.0
 }
 ```
 
@@ -64,9 +64,9 @@ weights = {
 
 ### Final Classification
 
-- Default threshold: 0.65
-- Above threshold: Bot-like
-- Below threshold: Human-like
+- Default threshold: 0.35
+- Above threshold: Human-like
+- Below threshold: Bot-like
 
 ## Usage
 
@@ -103,7 +103,7 @@ results = analyzer(features)
             'weight': 1.5
         }
     },
-    'threshold_used': 0.65
+    'threshold_used': 0.35
 }
 ```
 
@@ -137,28 +137,29 @@ config = HeuristicConfig(
 HeuristicConfig(
     mouse_events={
         "velocity": {
-            "min_velocity_variation": 1000.0,   # Minimum expected velocity standard deviation
-            "max_velocity_variation": 2500.0,  # Maximum expected velocity standard deviation
-            "weight": 1.0,                     # Weight for velocity analysis
+            "min_velocity_variation":       1000.0,  # Minimum expected velocity standard deviation
+            "max_velocity_variation":       2500.0,  # Maximum expected velocity standard deviation
+            "weight":                       1.0,     # Weight for velocity analysis
         },
         "movement_count": {
-            "min_movement_count": 50,          # Minimum expected mouse movements
-            "max_movement_count":800,          # Maximum expected mouse movements
-            "min_movement_count_too_low":5,    # Minimum mouse movement count to consider user as bot
-            "weight": 0.8,                     # Weight for movement count analysis
+            "min_movement_count":           100,     # Minimum expected mouse movements
+            "max_movement_count":           700,     # Maximum expected mouse movements
+            "min_movement_count_too_low":   5,       # Minimum mouse movement count to consider user as bot
+            "weight":                       0.8,     # Weight for movement count analysis
         },
         "checkbox_path": {
-            "min_expected_time": 0.3,          # "Minimum expected time between checkbox clicks (seconds)
-            "max_linearity_threshold": 0.95,   # Threshold for suspiciously linear paths
-            "min_movement_count": 20,          # Minimum expected movements between checkboxes
-            "max_distance_ratio": 1.4,         # Maximum ratio of path distance to direct distance
-            "min_movement_count_too_low":3     # Too low number of movements 
-            "max_avg_angle_degrees":0.40       # Max average angle between movements
-            "min_avg_angle_degrees":0.05       # Min average angle between movements
-            "weight": 1.5,                     # Weight for checkbox path analysis
+            "min_expected_time":            1,       # Minimum expected time between checkbox clicks (seconds)
+            "max_expected_time":            5,       # Maximum expected time between checkbox clicks (seconds)
+            "min_linearity_threshold":      0.75,    # Threshold for suspiciously linear paths
+            "max_linearity_threshold":      0.95,    # Threshold for suspiciously linear paths
+            "min_movement_count":           20       # Minimum expected movements between checkboxes
+            "min_movement_count_too_low":   3        # Minimum expected movements between checkboxes
+            "max_avg_angle_degrees":        0.40,    # Max average angle between movements
+            "min_avg_angle_degrees":        0.05,    # Min average angle between movements
+            "weight":                       1.5      # Weight for checkbox path analysis
         },
     },
-    score_threshold=0.65,                      # Threshold for bot classification (>threshold = bot)
+    "score_threshold":                      0.65,    # Threshold for bot classification (>threshold = bot)
 )
 ```
 
