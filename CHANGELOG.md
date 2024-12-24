@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.2.0 (2024-12-24)
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.2.0 -->
+
+## What's Changed
+### ✨ Features
+* Improved scoring functionality by @aliyuldashev in https://github.com/RedTeamSubnet/module.rt-wc-score/pull/5
+
+
+**Full Changelog**: https://github.com/RedTeamSubnet/module.rt-wc-score/compare/v1.1.2...v1.2.0
+
 ## v1.1.2 (2024-12-19)
 
 <!-- Release notes generated using configuration in .github/release.yml at v1.1.2 -->
