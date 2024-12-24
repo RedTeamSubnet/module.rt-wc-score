@@ -8,11 +8,11 @@ class VelocityConfig(BaseModel):
         """ Pydantic configuration. """
         frozen = True
     min_velocity_variation: float = Field(
-        default=1000.0,
+        default=850.0,
         description="Minimum expected velocity standard deviation",
     )
     max_velocity_variation: float = Field(
-        default=2500.0,
+        default=2000.0,
         description="Maximum expected velocity standard deviation",
     )
     weight: float = Field(default=1.0, description="Weight for velocity analysis")

@@ -27,7 +27,6 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
             Dictionary containing extracted features
         """
         try:
-
             checkboxes = data.get(self.config.input_field, [])
             mouse_movements = data.get("mouse_movements", [])
             if not checkboxes:
@@ -158,32 +157,15 @@ class CheckboxEventProcessor(BaseFeatureEngineer):
                     sorted_movements
                 )
             else:
-                linearity = 1.0  # Default to 1 if no movements
+                linearity, avg_angle_degrees = 1.0 ,0.0 # Default to 1 if no movements and 0 to no angles
 
-            direct_distance = np.sqrt(
-                (next_cb["x"] - current["x"]) ** 2 + (next_cb["y"] - current["y"]) ** 2
-            )
-
-            # Calculate actual path distance if we have movements
-            if len(movements_between) > 1:
-                path_distance = sum(
-                    np.sqrt(
-                        (movements_between[i + 1]["x"] - movements_between[i]["x"]) ** 2
-                        + (movements_between[i + 1]["y"] - movements_between[i]["y"])
-                        ** 2
-                    )
-                    for i in range(len(movements_between) - 1)
-                )
-            else:
-                path_distance = direct_distance
             # Store features for this pair
+
+
             checkbox.update(
                 {
                     "time_diff": time_diff,
                     "path_linearity": linearity,
-                    "distance_ratio": (
-                        path_distance / direct_distance if direct_distance > 0 else 1.0
-                    ),
                     "movement_count": len(movements_between),
                     "avg_angle_degrees": avg_angle_degrees,
                 }
